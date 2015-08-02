@@ -1,10 +1,16 @@
 
 package com.sarahmizzi.tiddi;
 
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.larswerkman.holocolorpicker.ColorPicker;
+import com.larswerkman.holocolorpicker.SaturationBar;
+import com.larswerkman.holocolorpicker.ValueBar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,6 +18,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ColorPicker picker = (ColorPicker) findViewById(R.id.picker);
+        SaturationBar saturationBar = (SaturationBar) findViewById(R.id.saturationbar);
+        ValueBar valueBar = (ValueBar) findViewById(R.id.valuebar);
+
+        picker.addSaturationBar(saturationBar);
+        picker.addValueBar(valueBar);
     }
 
     @Override
@@ -29,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_help) {
             return true;
         }
 
