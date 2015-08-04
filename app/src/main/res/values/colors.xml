@@ -7,4 +7,6 @@
     <color name="colorAccent">#FFC107</color>
 
     <color name="fabPressed">#ffca06</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

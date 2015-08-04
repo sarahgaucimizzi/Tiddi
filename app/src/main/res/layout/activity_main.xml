@@ -55,6 +55,7 @@
         android:layout_marginBottom="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
+        app:menu_icon="@drawable/ic_lightbulb_outline_white_24dp"
         app:menu_animationDelayPerItem="50"
         app:menu_backgroundColor="#CC2b2b2b"
         app:menu_buttonSpacing="5dp"
@@ -62,7 +63,6 @@
         app:menu_colorPressed="@color/fabPressed"
         app:menu_colorRipple="#99FFFFFF"
         app:menu_fab_size="normal"
-        app:menu_icon="@drawable/fab_add"
         app:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
         app:menu_labels_position="left"
         app:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
@@ -102,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/fab_add"
-            app:fab_label="Add Color to Queue"
+            app:fab_label="Add Colour to Queue"
             app:fab_size="mini" />
 
     </com.github.clans.fab.FloatingActionMenu>

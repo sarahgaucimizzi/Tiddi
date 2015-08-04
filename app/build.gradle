@@ -32,4 +32,5 @@ dependencies {
     compile 'com.larswerkman:HoloColorPicker:1.5'
     compile 'com.github.rey5137:material:1.2.1'
     compile 'com.github.clans:fab:1.5.5'
+    compile 'com.android.support:support-v4:22.2.1'
 }
