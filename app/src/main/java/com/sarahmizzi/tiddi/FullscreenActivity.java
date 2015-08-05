@@ -4,8 +4,6 @@ import com.sarahmizzi.tiddi.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -121,8 +119,7 @@ public class FullscreenActivity extends Activity {
                     }
                 });
 
-
-
+        // Get data from previous Activity
         Bundle b = getIntent().getExtras();
         final ArrayList<Integer> colors = b.getIntegerArrayList("color_list");
         int diameter = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, b.getInt("dimensions"), getResources().getDisplayMetrics());
@@ -130,7 +127,8 @@ public class FullscreenActivity extends Activity {
         final RelativeLayout parentLayout = (RelativeLayout) findViewById(R.id.fullscreen_layout);
         counter = 0;
 
-        if(isFullScreen){
+        // If full screen fill in background
+        if (isFullScreen) {
             parentLayout.setBackgroundColor(colors.get(0));
             diameter = 50;
         }
@@ -139,6 +137,7 @@ public class FullscreenActivity extends Activity {
         final Drawable background = getResources().getDrawable(R.drawable.circle);
         background.setColorFilter(colors.get(0), PorterDuff.Mode.MULTIPLY);
         contentView.setBackground(background);
+        // Increment counter
         counter++;
 
         // Set size
@@ -147,11 +146,13 @@ public class FullscreenActivity extends Activity {
         layoutParams.width = diameter;
         contentView.setLayoutParams(layoutParams);
 
+        // Set onClick for turning off colour button
         Button blackButton = (Button) findViewById(R.id.black_button);
         blackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isFullScreen){
+                // If fullscreen fill in background colour
+                if (isFullScreen) {
                     parentLayout.setBackgroundColor(getResources().getColor(R.color.black));
                 }
                 background.setColorFilter(getResources().getColor(R.color.black), PorterDuff.Mode.MULTIPLY);
@@ -159,18 +160,22 @@ public class FullscreenActivity extends Activity {
             }
         });
 
+        // Set onClick for colour changing button
         Button colorButton = (Button) findViewById(R.id.color_button);
         colorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(counter == colors.size()){
+                // Reset counter if out of colours
+                if (counter == colors.size()) {
                     counter = 0;
                 }
-                if(isFullScreen){
+                // If fullscreen fill in background colour
+                if (isFullScreen) {
                     parentLayout.setBackgroundColor(colors.get(counter));
                 }
                 background.setColorFilter(colors.get(counter), PorterDuff.Mode.MULTIPLY);
                 contentView.setBackground(background);
+                // Increment counter
                 counter++;
             }
         });
@@ -191,8 +196,6 @@ public class FullscreenActivity extends Activity {
                 }
             }
         });
-
-
 
 
     }

@@ -3,6 +3,8 @@
 
     <string name="action_help">Help</string>
 
+    <string name="fullscreen">Fullscreen</string>
+
     <string name="title_activity_fullscreen">FullscreenActivity</string>
 
     <string name="title">How to use Tiddi</string>

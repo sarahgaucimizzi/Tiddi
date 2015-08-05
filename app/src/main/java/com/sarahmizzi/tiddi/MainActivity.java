@@ -2,12 +2,8 @@
 package com.sarahmizzi.tiddi;
 
 import android.content.Intent;
-import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,20 +29,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Get display size
-
-        //DisplayMetrics displaymetrics = new DisplayMetrics();
-        //().getDefaultDisplay().getMetrics(displaymetrics);
-        //int height = displaymetrics.heightPixels;
-        //int width = displaymetrics.widthPixels;
-
-        //Display display = getWindowManager().getDefaultDisplay();
-        //Point size = new Point();
-        //display.getSize(size);
-        //int width = size.x;
-        //int height = size.y;
-
-
         // Initialise ColorPicker and bars
         final ColorPicker picker = (ColorPicker) findViewById(R.id.picker);
         SaturationBar saturationBar = (SaturationBar) findViewById(R.id.saturationbar);
@@ -58,9 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialise Seek bar
         final Slider seekBar = (Slider) findViewById(R.id.seekbar);
-
-        // Set seekbar maximum
-        //seekBar.setValueRange(0, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, width, getResources().getDisplayMetrics()), true);
 
         // Remove FAB animation
         final com.github.clans.fab.FloatingActionMenu floatingActionMenu = (FloatingActionMenu) findViewById(R.id.menu);
@@ -124,10 +103,6 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
-
-                // Intent activityChangeIntent = new Intent(MainActivity.this, FullscreenActivity.class);
-                // activityChangeIntent.putIntegerArrayListExtra("color_list", colors);
-                // MainActivity.this.startActivity(activityChangeIntent);
             }
         });
 
