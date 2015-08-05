@@ -1,43 +1,89 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:background="@color/background"
-    tools:context="com.sarahmizzi.tiddi.FullscreenActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fullscreencolor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context="com.craftydroid.lightarttool.FullscreenActivity">
+
 
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
+    <!--<com.github.pavlospt.CircleView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/fullscreen_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:keepScreenOn="true"
+        app:backgroundColorValue="#000000"
+        app:fillColor="@android:color/transparent"
+        app:fillRadius="0.9"
+        app:strokeColorValue="@android:color/transparent"
+        app:subtitleSize="0dp"
+        app:subtitleText="subtitle"
+        app:titleSize="0dp"
+        app:titleText="title" />-->
 
-    <RelativeLayout android:id="@+id/fullscreen_content"
+    <RelativeLayout
+        android:id="@+id/fullscreen_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center">
 
-        <View android:id="@+id/circleView"
-            android:keepScreenOn="true"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <View
+            android:id="@+id/fullscreen_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:background="@drawable/circle"/>
+            android:background="@drawable/circle"
+            android:keepScreenOn="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/black_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"/>
+
+            <Button
+                android:id="@+id/color_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"/>
+
+        </LinearLayout>
 
     </RelativeLayout>
 
-
     <!-- This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows.
-    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
+         android:fitsSystemWindows. -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-        <LinearLayout android:id="@+id/fullscreen_content_controls" style="?metaButtonBarStyle"
-            android:layout_width="match_parent" android:layout_height="wrap_content"
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls"
+            style="?metaButtonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay" android:orientation="horizontal"
+            android:background="@color/black_overlay"
+            android:orientation="horizontal"
             tools:ignore="UselessParent">
 
-            <Button android:id="@+id/dummy_button" style="?metaButtonBarButtonStyle"
-                android:layout_width="0dp" android:layout_height="wrap_content"
-                android:layout_weight="1" android:text="@string/dummy_button" />
-
         </LinearLayout>
-    </FrameLayout>-->
+
+    </FrameLayout>
 
 </FrameLayout>
+
+

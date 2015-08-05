@@ -34,13 +34,27 @@
 
         <com.rey.material.widget.Slider
             style="@style/Material.Widget.Slider.Discrete"
+            android:id="@+id/seekbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
             android:gravity="center"
-            app:sl_maxValue="100"
+            app:sl_maxValue="400"
             app:sl_minValue="0"
             app:sl_travelAnimDuration="20"
-            app:sl_value="30" />
+            app:sl_value="100" />
+
+        <com.rey.material.widget.CheckBox
+            android:id="@+id/checkbox"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="Fullscreen"
+            android:textColor="@android:color/white"
+            app:cbd_tickColor="@color/colorAccent"
+            app:cbd_strokeColor="@android:color/white"/>
 
     </LinearLayout>
 

@@ -4,6 +4,8 @@
     <string name="action_help">Help</string>
 
     <string name="title_activity_fullscreen">FullscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title">How to use Tiddi</string>
+    <string name="content">Choose any colour from the colour picker. Use the saturation and value bar to get the exact colour you want. Use the slider to choose the size of the light colour view, or tick the check box for the light view to appear fullscreen. Add the colour to the queue from the bottom button. You can also clear the queue and start the queue from this menu. When on the light colour view, press on the left of the screen to turn off the colour, or press right to start the next colour in the queue. Go back to add more colours or start over.</string>
+    <string name="done">Done</string>
 </resources>

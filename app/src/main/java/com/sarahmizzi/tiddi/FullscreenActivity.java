@@ -5,15 +5,21 @@ import com.sarahmizzi.tiddi.util.SystemUiHider;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
@@ -45,31 +51,33 @@ public class FullscreenActivity extends Activity {
     /**
      * The flags to pass to {@link SystemUiHider#getInstance}.
      */
-    private static final int HIDER_FLAGS = SystemUiHider.FLAG_HIDE_NAVIGATION;
+    private static final int HIDER_FLAGS = 0;
 
     /**
      * The instance of the {@link SystemUiHider} for this activity.
      */
     private SystemUiHider mSystemUiHider;
 
+    /**
+     * Static counter
+     */
+    private static int counter = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent i = getIntent();
-        ArrayList<Integer> colorsArray = i.getIntegerArrayListExtra("color_list");
 
-        View circle = findViewById(R.id.circleView);
-        circle.setBackgroundColor(colorsArray.get(0));
-
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        getActionBar().hide();
+        getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_fullscreen);
-        //setupActionBar();
+        setupActionBar();
 
-        //final View controlsView = findViewById(R.id.fullscreen_content_controls);
+        final View controlsView = findViewById(R.id.fullscreen_content_controls);
         final View contentView = findViewById(R.id.fullscreen_content);
+        View contentLayout = findViewById(R.id.fullscreen_layout);
 
         // Set up an instance of SystemUiHider to control the system UI for
         // this activity.
@@ -90,20 +98,20 @@ public class FullscreenActivity extends Activity {
                             // in-layout UI controls at the bottom of the
                             // screen.
                             if (mControlsHeight == 0) {
-                                //mControlsHeight = controlsView.getHeight();
+                                mControlsHeight = controlsView.getHeight();
                             }
                             if (mShortAnimTime == 0) {
                                 mShortAnimTime = getResources().getInteger(
                                         android.R.integer.config_shortAnimTime);
                             }
-                            //controlsView.animate()
-                            //        .translationY(visible ? 0 : mControlsHeight)
-                            //        .setDuration(mShortAnimTime);
+                            controlsView.animate()
+                                    .translationY(visible ? 0 : mControlsHeight)
+                                    .setDuration(mShortAnimTime);
                         } else {
                             // If the ViewPropertyAnimator APIs aren't
                             // available, simply show or hide the in-layout UI
                             // controls.
-                            //controlsView.setVisibility(visible ? View.VISIBLE : View.GONE);
+                            controlsView.setVisibility(visible ? View.VISIBLE : View.GONE);
                         }
 
                         if (visible && AUTO_HIDE) {
@@ -113,8 +121,67 @@ public class FullscreenActivity extends Activity {
                     }
                 });
 
+
+
+        Bundle b = getIntent().getExtras();
+        final ArrayList<Integer> colors = b.getIntegerArrayList("color_list");
+        int diameter = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, b.getInt("dimensions"), getResources().getDisplayMetrics());
+        final boolean isFullScreen = b.getBoolean("isFullscreen");
+        final RelativeLayout parentLayout = (RelativeLayout) findViewById(R.id.fullscreen_layout);
+        counter = 0;
+
+        if(isFullScreen){
+            parentLayout.setBackgroundColor(colors.get(0));
+            diameter = 50;
+        }
+
+        // Set color
+        final Drawable background = getResources().getDrawable(R.drawable.circle);
+        background.setColorFilter(colors.get(0), PorterDuff.Mode.MULTIPLY);
+        contentView.setBackground(background);
+        counter++;
+
+        // Set size
+        final RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) contentView.getLayoutParams();
+        layoutParams.height = diameter;
+        layoutParams.width = diameter;
+        contentView.setLayoutParams(layoutParams);
+
+        Button blackButton = (Button) findViewById(R.id.black_button);
+        blackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isFullScreen){
+                    parentLayout.setBackgroundColor(getResources().getColor(R.color.black));
+                }
+                background.setColorFilter(getResources().getColor(R.color.black), PorterDuff.Mode.MULTIPLY);
+                contentView.setBackground(background);
+            }
+        });
+
+        Button colorButton = (Button) findViewById(R.id.color_button);
+        colorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(counter == colors.size()){
+                    counter = 0;
+                }
+                if(isFullScreen){
+                    parentLayout.setBackgroundColor(colors.get(counter));
+                }
+                background.setColorFilter(colors.get(counter), PorterDuff.Mode.MULTIPLY);
+                contentView.setBackground(background);
+                counter++;
+            }
+        });
+
+
+        // Upon interacting with UI controls, delay any scheduled hide()
+        // operations to prevent the jarring behavior of controls going away
+        // while interacting with the UI.
         // Set up the user interaction to manually show or hide the system UI.
         contentView.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 if (TOGGLE_ON_CLICK) {
@@ -125,10 +192,9 @@ public class FullscreenActivity extends Activity {
             }
         });
 
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-        //findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+
+
+
     }
 
     @Override
